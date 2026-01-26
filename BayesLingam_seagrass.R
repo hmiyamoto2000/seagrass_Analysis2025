@@ -5,19 +5,24 @@ library('fastICA')
 source('bayeslingam/main/loud.R')
 loud()
 
-df <- read.csv("EFA_seagrass.csv",header=T,sep=",")
+df <- read.csv("input_file.csv",header=T,sep=",")
 
 
 #Seagrass
 x <- df$Seagrass
 y <- df$B_Desulfobulbaceae
-z <- df$B_Hyphomonadaceae
-w <- df$E_Corallinophycidae
-w1 <- df$E_Diatomea
-d <- data.frame(x1=x, x2=y,x3=z,x4=w, x5=w1)
+z <- df$B_bacterium_enrichment_culture_clone_22_2013
+w <- df$B_Defluviitaleaceae
+w1 <- df$B_Hyphomonadaceae
+w2 <- df$E_Corallinophycidae
+w3 <- df$B_uncultured_Aminicenantes_bacterium
+w4 <- df$E_Diatomea
+w5 <- df$E_Intramacronucleata
+d <- data.frame(x1=x, x2=y,x3=z,x4=w, x5=w1, x6=w2, x7=w3, x8=w4, x9=w5)
 result <- greedybayeslingam(d,model='GL')
 
-sink('----------.txt', append = TRUE)
+
+sink('out_put.txt', append = TRUE)
 print (result)
 sink()
 
